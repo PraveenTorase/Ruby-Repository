@@ -3,12 +3,12 @@ Given(/^I logged in to puppy webpage$/) do
 
 @browser.goto "http://puppies.herokuapp.com"
 end
-And(/^I click the View Details$/) do
+And(/^I click on the View Details$/) do
   @browser.button(:value => "View Details").click
 end
 
-And(/^I click the adopt me button$/) do
-  # puts "click me"
+And(/^I click on the adopt me button$/) do
+  
   sleep 5
   @browser.button(:value =>"Adopt Me!").click
 end
@@ -39,6 +39,12 @@ When(/^I place an order$/) do
   @browser.button(:value =>"Place Order").click
 end
 
-Then(/^I should see "([^"]*)"$/) do |arg1|
-  @browser.text.eql? "Thank you for adopting a puppy!"
+Then(/^the order is confirmed$/) do |arg1|
+sleep 5
+  if @browser.p(:id => "notice").text.match "Thank you for adopting a puppy!"
+      puts "Thank you for adopting a puppy!"
+  else
+    puts "Sorry puppy not adopted"
+  end
+  end
 end
